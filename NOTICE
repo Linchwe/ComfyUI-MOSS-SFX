@@ -1,0 +1,6 @@
+This node does not include or redistribute any model code or weights.
+It calls the `moss_soundeffect_v2` Python package and the MOSS-SoundEffect-v2.0
+model weights, which are released by the OpenMOSS Team under the Apache License 2.0.
+
+https://github.com/OpenMOSS/MOSS-TTS
+https://huggingface.co/OpenMOSS-Team/MOSS-SoundEffect-v2.0
