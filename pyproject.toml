@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-moss-sfx"
-description = "Sound effects for ComfyUI with MOSS-SoundEffect v2.0: text to SFX, and video to SFX from a cue sheet (WAV stems, mix and FCP 7 XML timeline)."
-version = "0.3.0"
+description = "Sound effects from an English prompt in ComfyUI with MOSS-SoundEffect v2.0. Runs locally, works on 8 GB cards."
+version = "1.0.0"
 license = { file = "LICENSE" }
 dependencies = []
 

@@ -1,4 +1,4 @@
-ComfyUI-MOSS-SFX (테스트 버전 0.3, Cue Sheet 노드 포함)
+ComfyUI-MOSS-SFX (버전 1.0)
 
 MOSS-SoundEffect v2.0 을 ComfyUI 에서 쓰는 작은 노드입니다.
 모델을 돌리는 코드는 OpenMOSS 의 moss_soundeffect_v2 패키지(Apache-2.0)가 맡고,
@@ -55,36 +55,15 @@ MOSS SFX Loader -> MOSS SFX Generate -> Save Audio(기본 노드)
 - dit_dtype : RTX 30 시리즈 이상은 bfloat16(기본값), RTX 20 시리즈는 float16 으로 바꾸세요. 둘 다 메모리 사용량은 같습니다.
   float32 는 메모리를 두 배 가까이 써서 8GB 카드에서는 쓰지 마세요.
 - keep_loaded : 끄면 생성이 끝날 때 모델을 VRAM 에서 내립니다. 다음 생성 때 다시 불러오느라 시간이 걸립니다.
-- unload_other_models : 켜 두면(기본값) 생성 전에 ComfyUI 가 들고 있는 다른 모델(앞에서 쓴 Qwen3-VL 등)을 VRAM 에서 내립니다. 8GB 카드는 꼭 켜 두세요.
+- unload_other_models : 켜 두면(기본값) 생성 전에 ComfyUI 가 들고 있는 다른 모델(앞에서 쓴 이미지 생성 모델 등)을 VRAM 에서 내립니다. 8GB 카드는 꼭 켜 두세요.
 - 프롬프트는 영어와 중국어만 됩니다. 한국어는 인식되지 않습니다.
-
-MOSS SFX Cue Sheet (0.3 추가)
-Load Video -> (video) MOSS SFX Cue Sheet <- MOSS SFX Loader
-MOSS SFX Cue Sheet (audio) -> Create Video -> Save Video
-
-- cue_sheet 칸에 JSON 큐 시트(어떤 소리를 언제 낼지)를 붙여넣습니다.
-- cue_source 로 큐 시트를 어디서 가져올지 고릅니다.
-  text box (cue_sheet) : 위 칸에 붙여넣은 큐 시트 (LLM 이 만든 것 등)
-  connected input (cue_sheet_in) : cue_sheet_in 에 연결된 큐 시트 (Qwen3-VL 이 쓴 것)
-  고르지 않은 쪽은 실행되지 않습니다. (text box 일 때는 Qwen3-VL 이 돌지 않습니다)
-- MOSS SFX Cue Prompt (for Qwen3-VL) 노드는 영상에서 1초에 frames_per_second 장씩 프레임을 골라
-  각 프레임 왼쪽 위에 시간을 적고, Qwen3-VL 에게 큐 시트를 쓰라고 하는 지시문을 만듭니다.
-  Get Video Components (images, fps) -> MOSS SFX Cue Prompt -> Generate Text (image, prompt) -> cue_sheet_in
-- type 이 continuous 인 소리(비, 바람, 실내음)는 start ~ end 길이에 맞춰 만듭니다.
-- type 이 oneshot 인 소리(발소리 등)는 한 번만 만들고, 앞쪽 무음을 잘라서 times 의 각 시간에 붙입니다.
-- use 를 쓰면 다른 oneshot 소리를 다시 만들지 않고 재사용합니다. (예: 멀리 있는 사람 발소리)
-- volume_db 로 소리별 볼륨을 정합니다. 각 소리는 먼저 -1dB 로 크기를 맞춘 뒤 volume_db 를 적용합니다.
-- 결과는 ComfyUI\output\sfx\cue_00001 같은 폴더에 저장됩니다.
-  소리별 wav, mix.wav(전체), timeline.xml(FCP 7 XML: 영상 + 소리별 오디오 트랙)
-- timeline.xml 은 FilmCraft, Premiere, DaVinci Resolve 에서 불러올 수 있습니다.
-  wav 파일과 영상 파일의 경로가 그대로 들어 있으니 폴더를 옮기지 말고 불러오세요.
 
 
 [참고]
 - 첫 생성은 모델을 불러오느라 약 3분 걸립니다. 두 번째부터는 모델이 이미 올라가 있어서 다시 읽지 않습니다.
 - low_vram 모드에서 생성 중 VRAM 사용량은 약 4~5GB 였습니다. (RTX 3060 12GB 에서 측정)
 - CPU RAM 은 16GB 이상을 권장합니다.
-- 0.2 는 8GB 카드용 수정(다른 모델 내리기, float16 옵션)이 들어간 버전이며, 8GB 카드와 RTX 20 시리즈에서는 아직 직접 확인하지 못했습니다.
+- 8GB 카드와 RTX 20 시리즈 설정은 아직 충분히 검증되지 않았습니다.
 - 콘솔에 [MOSS-SFX] This GPU has no bfloat16 hardware 가 나오면 dit_dtype 을 float16 으로 바꾸세요.
 
 
