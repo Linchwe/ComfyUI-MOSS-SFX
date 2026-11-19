@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-moss-sfx"
+description = "Sound effects for ComfyUI with MOSS-SoundEffect v2.0: text to SFX, and video to SFX from a cue sheet (WAV stems, mix and FCP 7 XML timeline)."
+version = "0.3.0"
+license = { file = "LICENSE" }
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/Linchwe/comfyui-moss-sfx"
+
+[tool.comfy]
+PublisherId = "linchwe"
+DisplayName = "ComfyUI-MOSS-SFX"
+Icon = ""
