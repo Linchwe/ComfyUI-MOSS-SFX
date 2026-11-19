@@ -6,7 +6,7 @@ license = { file = "LICENSE" }
 dependencies = []
 
 [project.urls]
-Repository = "https://github.com/Linchwe/comfyui-moss-sfx"
+Repository = "https://github.com/Linchwe/ComfyUI-MOSS-SFX"
 
 [tool.comfy]
 PublisherId = "linchwe"
